@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SatisfactoryDB.Data
 {
-    class BiomassParser : AbstractDataParser<Biomass>
+    class BiomassParser : AbstractDataParser<Item>
     {
         public BiomassParser(JObject dataObject) : base(dataObject)
         {
@@ -19,7 +19,7 @@ namespace SatisfactoryDB.Data
         /// Parse biomass
         /// </summary>
         /// <returns></returns>
-        public override List<Biomass> Parse()
+        public override List<Item> Parse()
         {
             //loop through data
             foreach (JObject obj in this.RawData)
@@ -35,7 +35,7 @@ namespace SatisfactoryDB.Data
                 float radioactiveDecay = getRadioactiveDecay(obj);
 
                 //create item and add to list
-                Biomass item = new Biomass(className, name, description, stackSize, resourceSink, form, energy, radioactiveDecay);
+                Item item = new Item(className, name, description, stackSize, resourceSink, energy, radioactiveDecay, form);
                 Data.Add(item);
 
                 Console.WriteLine("BiomassItem created: " + item.Name);

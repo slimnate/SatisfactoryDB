@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace SatisfactoryDB.Data
 {
-    class ResourceParser : AbstractDataParser<Resource>
+    class ResourceParser : AbstractDataParser<Item>
     {
         public ResourceParser(JObject dataObject) : base(dataObject)
         {
 
         }
 
-        public override List<Resource> Parse()
+        public override List<Item> Parse()
         {
             //loop through data
             foreach (JObject obj in this.RawData)
@@ -32,7 +32,7 @@ namespace SatisfactoryDB.Data
                 float collectMultiplier = getCollectMultiplier(obj);
 
                 //create item and add to list
-                Resource item = new Resource(className, name, description, stackSize, resourceSink, form, collectMultiplier, energy, radioactiveDecay);
+                Item item = new Item(className, name, description, stackSize, resourceSink, energy, radioactiveDecay, form, collectMultiplier);
                 Data.Add(item);
 
                 Console.WriteLine("BiomassItem created: " + item.Name);

@@ -9,7 +9,7 @@ namespace SatisfactoryDB.BO
 {
     public enum MatterState
     {
-        Solid, Liquid
+        NA, Solid, Liquid
     }
 
     public class Item
@@ -29,17 +29,19 @@ namespace SatisfactoryDB.BO
         public int Id { get; set; }
 
         //string values
-        public string ClassName;
-        public string Name;
-        public string Description;
+        public string ClassName { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
 
         //int values
-        public int StackSize;
-        public int ResourceSinkPoints;
+        public int StackSize { get; set; }
+        public int ResourceSinkPoints { get; set; }
+        public MatterState State { get; set; }
 
         //float values
-        public float EnergyValue;
-        public float RadioactiveDecay;
+        public float EnergyValue { get; set; }
+        public float RadioactiveDecay { get; set; }
+        public float CollectSpeedMultiplier { get; set; }
 
         /// <summary>
         /// Creates a new Item with the specified properties.
@@ -48,9 +50,12 @@ namespace SatisfactoryDB.BO
         /// <param name="name">Item name</param>
         /// <param name="description">Item description</param>
         /// <param name="stackSize">Item stack size</param>
-        /// <param name="energy">Energy value (defaults to <code>0.0f</code>)</param>
-        /// <param name="radioactiveDecay">Radioactive decay value (defaults to <code>0.0f</code>)</param>
-        public Item(string className, string name, string description, int stackSize, int resourceSinkPoints, float energy=0.0f, float radioactiveDecay=0.0f)
+        /// <param name="energy">Energy value</param>
+        /// <param name="radioactiveDecay">Radioactive decay value</param>
+        /// <param name="state">Radioactive decay value (optional, defaults to 0)</param>
+        /// <param name="radioactiveDecay">Radioactive decay value (optional, defaults to 0)</param>
+        public Item(string className, string name, string description, int stackSize, int resourceSinkPoints,
+            float energy, float radioactiveDecay, MatterState state=MatterState.NA, float collectSpeedMult=0.0f)
         {
             this.ClassName = className;
             this.Name = name;
@@ -59,6 +64,8 @@ namespace SatisfactoryDB.BO
             this.ResourceSinkPoints = resourceSinkPoints;
             this.EnergyValue = energy;
             this.RadioactiveDecay = radioactiveDecay;
+            this.State = state;
+            this.CollectSpeedMultiplier = collectSpeedMult;
         }
 
         public override string ToString()
